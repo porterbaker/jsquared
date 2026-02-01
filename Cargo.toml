@@ -1,0 +1,8 @@
+[package]
+name = "jsquared"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+duckdb = { version = "0.10", features = ["bundled"] }
+chrono = "=0.4.31"
