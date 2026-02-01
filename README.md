@@ -15,10 +15,10 @@ formatting, and want to be adequeately
 equipped to handle the formatting.
 
 Current Upcoming Features:
-- [] Parquet File Reading/Parsing
-- [] Config.yaml Schema build off of configuration specifications
-- [] DuckDB database creation, handling, and data ingestion
-- [] Query support for loading SQL files and performing mass operations
+- [ ] Parquet File Reading/Parsing
+- [ ] Config.yaml Schema build off of configuration specifications
+- [ ] DuckDB database creation, handling, and data ingestion
+- [ ] Query support for loading SQL files and performing mass operations
 
 Future Considerations
 - Complete Database Schema Inference (no config file needed)
