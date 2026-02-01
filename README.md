@@ -1,5 +1,6 @@
 ---
-#JSquared
+
+# JSquared
 
 JSquared is a Rust CLI tool allowing for a
 quick and optimized way of creating a
