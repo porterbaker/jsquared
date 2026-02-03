@@ -1,15 +1,19 @@
 use std::env;
 use std::path::Path;
 use std::ffi::OsStr;
-//use duckdb::{params, Connection, Result};
-use duckdb::Result;
+use std::fs;
+use std::io;
+use duckdb::{Config, Connection, Result};
+use serde::Deserialize;
 
-/*
-struct Duck {
-    id: i32,
-    name: String,
+#[derive(Deserialize)]
+struct DbConfig {
+    access_mode: String,
+    threads: String,
 }
-*/
+
+#[derive(Deserialize)]
+struct 
 
 fn main() -> Result<()> {
     let args: Vec<String> = env::args().collect();
@@ -32,29 +36,25 @@ fn main() -> Result<()> {
         }
     }
 
-    println!("Parquet path: {:?}", parquet_repo_path);
+    let file = fs::File::open(config_file_path).expect("Failed to open config file");
+    let reader = io::BufReader::new(file);
+    let db_config: DbConfig = serde_yaml::from_reader(reader).expect("Failed to parse .yaml");
 
+    let mut config = Config::default();
+    config.with("access_mode", db_config.access_mode)?;
+    config.with("threads", db_config.threads)?;
+
+
+    let conn = Connection::open(&config.database.path)?;
+
+    conn.execute(&format!("PRAGMA threads={}", config.engine.threads), [])?;
+    conn.execute(&format!(
+        "PRAGMA memory_limit='{}'",
+        config.engine.memory_limit
+    ), [])?;
+
+
+
+    println!("DuckDB configured and connection opened successfully.");
     Ok(())
 }
-
-/*
-    let conn = Connection::open_in_memory()?;
-    conn.execute(
-        "CREATE TABLE ducks (id INTEGER PRIMARY KEY, name TEXT)",
-        [],
-    )?;
-
-    let ducks = conn
-        .prepare("FROM ducks")?
-        .query_map([], |row| {
-            Ok(Duck {
-                id: row.get(0)?,
-                name: row.get(1)?,
-            })
-        })?
-        .collect::<Result<Vec<_>>>()?;
-
-    for duck in ducks {
-        println!("{}) {}", duck.id, duck.name)
-    }
-    */

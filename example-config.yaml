@@ -1,0 +1,37 @@
+database:
+  name: analytics
+  path: ./analytics.db
+
+engine:
+  threads: 8
+  memory_limit: 4GB
+  temp_directory: ./tmp
+
+sources:
+  users_raw:
+    type: parquet
+    path: data/users/*.parquet
+
+  events_raw:
+    type: parquet
+    path: data/events/*.parquet
+
+tables:
+  users:
+    from: users_raw
+    select:
+      - id
+      - email
+      - created_at
+    where: "email IS NOT NULL"
+
+  daily_events:
+    from: events_raw
+    select:
+      - "date_trunc('day', timestamp) as day"
+      - "count(*) as events"
+    group_by:
+      - day
+
+materialization:
+  default: table   # or view
