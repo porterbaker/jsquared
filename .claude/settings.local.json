@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"C:\\\\Users\\\\jacks\\\\Desktop\\\\jsquared\\\\.claude\" 2>/dev/null; echo done)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
