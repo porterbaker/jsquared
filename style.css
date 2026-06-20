@@ -459,6 +459,28 @@ body {
 .venue-leaf-left  { left: -28px; }
 .venue-leaf-right { right: -28px; transform: translateY(-50%) scaleX(-1); }
 
+/* ── VENUE / STAY NAME AS A LINK ──
+   Used wherever a place name (ceremony, reception, or lodging) links out
+   to Google Maps. Keeps the same italic mauve styling, just adds a quiet
+   underline cue on hover/focus so it still reads as elegant text first,
+   clickable link second. */
+.venue-link,
+.stay-name {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.venue-link:hover,
+.venue-link:focus-visible,
+.stay-name:hover,
+.stay-name:focus-visible {
+  color: var(--mulberry);
+  border-bottom-color: var(--gold);
+}
+
 /* ── FOOTER NOTE ── */
 .footer-note {
   text-align: center;
@@ -487,6 +509,103 @@ body {
   background: linear-gradient(to right, transparent, rgba(200,169,110,0.3), transparent);
   margin: 1.1rem auto 0;
 }
+
+/* ── WHERE TO STAY CARD ──
+   Same glass-card language as .venue-section, sized a little wider to
+   comfortably hold a short list of lodging options. */
+.stay-section {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 2.5rem 3rem;
+  max-width: 560px;
+  width: 100%;
+}
+
+.stay-card-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(200,169,110,0.2);
+  box-shadow:
+    0 4px 30px rgba(155,112,130,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.stay-eyebrow {
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 0.4rem;
+}
+
+.stay-subtext {
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text-mid);
+  margin-bottom: 1.6rem;
+}
+
+.stay-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.stay-item {
+  padding: 1.1rem 0;
+}
+
+.stay-item:first-child {
+  padding-top: 0;
+}
+
+.stay-item:last-child {
+  padding-bottom: 0;
+}
+
+.stay-item + .stay-item {
+  border-top: 1px solid rgba(200,169,110,0.22);
+}
+
+.stay-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--dark-mauve);
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+}
+
+.stay-detail {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--text-light);
+}
+
+.stay-leaf-left,
+.stay-leaf-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.stay-leaf-left  { left: -28px; }
+.stay-leaf-right { right: -28px; transform: translateY(-50%) scaleX(-1); }
 
 /* ── RSVP ── */
 .rsvp-section {
@@ -531,6 +650,8 @@ body {
   .venue-section { padding: 2rem 1.75rem; }
   .venue-leaf-left, .venue-leaf-right { display: none; }
   .photo-botanical { display: none; }
+  .stay-section { padding: 2rem 1.75rem; }
+  .stay-leaf-left, .stay-leaf-right { display: none; }
 }
 
 @media (max-width: 380px) {
